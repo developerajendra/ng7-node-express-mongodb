@@ -8,8 +8,7 @@ import {RegisterService} from '../../../services/register.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  // name = new FormControl('');
-
+  
   registerForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
