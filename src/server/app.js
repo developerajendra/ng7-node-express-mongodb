@@ -27,9 +27,9 @@ app.use((req,res, next)=> {
     next();
 });
 
+
+//Resgister 
 app.use(bodyParser.json());
-
-
 app.post('/register',(req, res, next)=>{
     let {email, password, repeatPassword} = req.body;
 
@@ -39,7 +39,7 @@ app.post('/register',(req, res, next)=>{
         'repeatPassword': repeatPassword,
     }
 
-    db.collection('userDetail').insertOne(data,(error, collection)=>{
+    db.collection('user').insertOne(data,(error, collection)=>{
         if(error) throw error;
         console.log("record inserted successfully");
     });
@@ -48,6 +48,32 @@ app.post('/register',(req, res, next)=>{
     next();
 });
 
+
+//Login post
+app.post('/login',(req, res, next)=>{
+     let {email, password} = req.body;
+     db.collection('user').findOne({email, password},(error, result)=>{
+        if(error)throw error;
+
+        if(result){
+            res.send({success:true});
+            // res.redirect('/');
+        }else{
+            res.send({errorMessage:"User doesn't matched."}); 
+        }
+     })
+});
+
+
+app.get('*', function(req, res, next) {
+    let err = new Error(`${req.ip} tried to reach ${req.originalUrl}`); // Tells us which IP tried to reach a particular URL
+    err.statusCode = 404;
+    err.shouldRedirect = true; //New property on err so that our middleware will redirect
+    res.send({errorMessage:"User doesn't matched."}); 
+    next(err);
+  });
+
+//Server
 app.listen(4000,()=>{
     console.log('server is running....');
 });

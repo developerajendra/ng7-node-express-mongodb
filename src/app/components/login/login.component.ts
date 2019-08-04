@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import {LoginService} from '../../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -13,13 +14,21 @@ export class LoginComponent implements OnInit {
   });
 
   
-  constructor() { }
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
   }
 
   onSubmit(){
-    console.log("login user...", this.loginForm.value);
+    this.loginService.loginUsers(this.loginForm.value).subscribe(user=>{
+      let _user = JSON.parse(user);
+
+      if(_user.success){
+        console.log("login success...");
+        return;
+      }
+      console.log('user is not herer');
+    });
   }
 
 }

@@ -1,6 +1,7 @@
  
     <form [formGroup]='loginForm' (ngSubmit)="onSubmit()">
-      <div class="container">
+       
+      <div class="login-wrapper">
         <h1>Login</h1>
         <p>Please fill in this form to create an account.</p>
         <hr>
@@ -12,10 +13,12 @@
         <input type="password" placeholder="Enter Password" formControlName="password" required>
      
         <button type="submit" class="registerbtn">Login</button>
-      </div>
       
       <div class="container signin">
         <p>Already have an account? <a routerLink="/register">Register</a>.</p>
       </div>
+
+    </div>
+       
     </form>
     
