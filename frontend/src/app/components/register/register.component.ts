@@ -15,6 +15,11 @@ export class RegisterComponent implements OnInit {
     repeatPassword: new FormControl(''),
   });
 
+  userValidator = {
+    isAlreadyExist:false,
+    errorMessage:''
+  };
+
   constructor(private registerService:RegisterService) {
    
    }
@@ -23,8 +28,22 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(){
-    this.registerService.createUsers(this.registerForm.value).subscribe(users=>{
-      console.log('users', users);
+    this.registerService.createUsers(this.registerForm.value).subscribe(user=>{
+      let _user = JSON.parse(user.toString());
+
+      if(_user && _user.errorMessage){
+        this.userValidator = {
+          isAlreadyExist:true,
+          errorMessage:_user.errorMessage
+        };
+        console.log(_user.errorMessage);
+        return;
+      }
+      console.log( _user);
+      this.userValidator = {
+        isAlreadyExist:false,
+        errorMessage:''
+      };
     });
     // console.log('value...',this.registerForm.value);
   }

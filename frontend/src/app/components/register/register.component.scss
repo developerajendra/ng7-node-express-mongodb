@@ -2,6 +2,13 @@
   * {
     box-sizing: border-box;
   }
+
+  .error{
+    color: red;
+  }
+  .input-error{
+    outline: solid 2px red !important;
+  }
   
   /* Add padding to containers */
    
@@ -68,4 +75,7 @@
   form{
     flat:left;
     width:80%;
-  }}
+  }
+
+}
+

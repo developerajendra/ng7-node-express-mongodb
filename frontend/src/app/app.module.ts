@@ -9,12 +9,14 @@ import {RegisterComponent} from "./components/register/register.component"
 import {LoginComponent} from "./components/login/login.component";
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
